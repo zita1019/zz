@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>残缺的棋盘 - 交互式谜题</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+    <div class="container">
+        <header>
+            <h1>3. 问题表征的影响</h1>
+        </header>
+        
+        <main>
+            <section class="puzzle-description">
+                <p>一张国际象棋的棋盘，去掉对角线上的两格之后，你能否用整数个小矩形块（其面积为棋盘两个格子的大小），恰好覆盖残缺的棋盘？</p>
+                <p class="rule">提示：不允许折断，也不允许重叠。</p>
+            </section>
+
+            <div class="puzzle-wrapper">
+                <div id="board" class="chessboard">
+                    <!-- The 8x8 grid will be generated via JavaScript -->
+                </div>
+                
+                <div class="controls">
+                    <div class="stat-card">
+                        <span class="label">当前多米诺数:</span>
+                        <span id="domino-count" class="value">0</span>
+                    </div>
+                    <button id="reset-btn" class="glass-btn">重置棋盘</button>
+                    <button id="reveal-btn" class="glass-btn primary">揭晓证明</button>
+                </div>
+            </div>
+
+            <div id="proof-panel" class="proof-panel hidden">
+                <h3>为什么这是不可能的？</h3>
+                <p>通过<b>问题表征</b>的改变，我们可以轻松看到答案：</p>
+                <ul>
+                    <li>标准的国际象棋棋盘有 32 个黑格和 32 个白格。</li>
+                    <li>对角线上的两格颜色总是相同的（在这个例子中通常是两个白格或两个黑格）。</li>
+                    <li>去掉对角线的两格后，棋盘剩下 <b>32 个黑格和 30 个白格</b>（或反之）。</li>
+                    <li>每一个多米诺骨牌（1x2 矩形）<b>必须</b>恰好覆盖一个黑格和一个白格。</li>
+                    <li>因此，31 个多米诺骨牌永远无法覆盖剩下的 62 个格子，因为它们需要 31 个黑格和 31 个白格。</li>
+                </ul>
+            </div>
+        </main>
+        
+        <footer>
+            <p>交互式演示 · 探索问题解决的艺术</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
