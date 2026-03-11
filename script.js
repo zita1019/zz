@@ -141,4 +141,38 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     initBoard();
+
+    // 思路提醒逻辑
+    const hintSidebar = document.getElementById('hint-sidebar');
+    const hintToggle = document.getElementById('hint-toggle');
+    const nextHintBtn = document.getElementById('next-hint-btn');
+    const hintQuestionsContainer = document.getElementById('hint-questions');
+
+    const hints = [
+        "1. 一块 1×2 的小矩形骨牌，放在棋盘上时，它覆盖的两个格子颜色有什么规律？",
+        "2. 原始棋盘有多少黑格、多少白格？去掉对角线两端的两格之后，黑格和白格各剩多少？",
+        "3. 如果每块骨牌都必须同时盖一黑一白，而剩余棋盘的黑格与白格数量不相等，覆盖任务能完成吗？为什么？"
+    ];
+
+    let currentHintIndex = 0;
+
+    hintToggle.addEventListener('click', () => {
+        hintSidebar.classList.toggle('collapsed');
+    });
+
+    nextHintBtn.addEventListener('click', () => {
+        if (currentHintIndex < hints.length) {
+            const hintElement = document.createElement('div');
+            hintElement.classList.add('hint-item');
+            hintElement.textContent = hints[currentHintIndex];
+            hintQuestionsContainer.appendChild(hintElement);
+            currentHintIndex++;
+
+            if (currentHintIndex === hints.length) {
+                nextHintBtn.textContent = "已显示所有提示";
+                nextHintBtn.disabled = true;
+                nextHintBtn.classList.remove('primary');
+            }
+        }
+    });
 });

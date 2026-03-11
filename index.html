@@ -37,12 +37,29 @@
                 <h3>为什么这是不可能的？</h3>
                 <p>通过<b>问题表征</b>的改变，我们可以轻松看到答案：</p>
                 <ul>
-                    <li>标准的国际象棋棋盘有 32 个黑格和 32 个白格。</li>
+                    <li>标准的国际象棋棋盘有 32 个黑格 and 32 个白格。</li>
                     <li>对角线上的两格颜色总是相同的（在这个例子中通常是两个白格或两个黑格）。</li>
                     <li>去掉对角线的两格后，棋盘剩下 <b>32 个黑格和 30 个白格</b>（或反之）。</li>
                     <li>每一个多米诺骨牌（1x2 矩形）<b>必须</b>恰好覆盖一个黑格和一个白格。</li>
                     <li>因此，31 个多米诺骨牌永远无法覆盖剩下的 62 个格子，因为它们需要 31 个黑格和 31 个白格。</li>
                 </ul>
+            </div>
+
+            <!-- 思路提醒方块 -->
+            <div id="hint-sidebar" class="hint-sidebar collapsed">
+                <button id="hint-toggle" class="hint-toggle-btn">
+                    <span class="icon">💡</span>
+                    <span class="text">思路提醒</span>
+                </button>
+                <div class="hint-content">
+                    <h3>💡 思路提醒</h3>
+                    <div id="hint-questions" class="hint-questions">
+                        <!-- 问题将通过 JS 动态插入 -->
+                    </div>
+                    <button id="next-hint-btn" class="glass-btn primary small">
+                        点击出现下一问
+                    </button>
+                </div>
             </div>
         </main>
         
