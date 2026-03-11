@@ -2,8 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const boardElement = document.getElementById('board');
     const dominoCountElement = document.getElementById('domino-count');
     const resetBtn = document.getElementById('reset-btn');
-    const revealBtn = document.getElementById('reveal-btn');
-    const proofPanel = document.getElementById('proof-panel');
 
     let selectedCell = null;
     let dominoes = [];
@@ -13,13 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function initBoard() {
         boardElement.innerHTML = '';
         const rect = boardElement.getBoundingClientRect();
-        
+
         for (let row = 0; row < gridSize; row++) {
             for (let col = 0; col < gridSize; col++) {
                 const index = row * gridSize + col;
                 const cell = document.createElement('div');
                 cell.classList.add('cell');
-                
+
                 // Color pattern
                 if ((row + col) % 2 === 0) {
                     cell.classList.add('white');
@@ -43,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleCellClick(cell) {
         const index = parseInt(cell.dataset.index);
-        
+
         // Remove domino if clicking on a cell already covered
         const existingDominoIndex = dominoes.findIndex(d => d.cells.includes(index));
         if (existingDominoIndex !== -1) {
@@ -57,11 +55,11 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             const index1 = parseInt(selectedCell.dataset.index);
             const index2 = index;
-            
+
             if (isAdjacent(index1, index2) && !isCovered(index2)) {
                 addDomino(index1, index2);
             }
-            
+
             selectedCell.classList.remove('selected');
             selectedCell = null;
         }
@@ -72,9 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const c1 = idx1 % gridSize;
         const r2 = Math.floor(idx2 / gridSize);
         const c2 = idx2 % gridSize;
-        
-        return (Math.abs(r1 - r2) === 1 && c1 === c2) || 
-               (Math.abs(c1 - c2) === 1 && r1 === r2);
+
+        return (Math.abs(r1 - r2) === 1 && c1 === c2) ||
+            (Math.abs(c1 - c2) === 1 && r1 === r2);
     }
 
     function isCovered(index) {
@@ -84,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function addDomino(idx1, idx2) {
         const cell1 = document.querySelector(`[data-index="${idx1}"]`);
         const cell2 = document.querySelector(`[data-index="${idx2}"]`);
-        
+
         const rect1 = cell1.getBoundingClientRect();
         const rect2 = cell2.getBoundingClientRect();
         const boardRect = boardElement.getBoundingClientRect();
@@ -130,15 +128,8 @@ document.addEventListener('DOMContentLoaded', () => {
             selectedCell = null;
         }
         updateStats();
-        proofPanel.classList.add('hidden');
     });
 
-    revealBtn.addEventListener('click', () => {
-        proofPanel.classList.toggle('hidden');
-        if (!proofPanel.classList.contains('hidden')) {
-            proofPanel.scrollIntoView({ behavior: 'smooth' });
-        }
-    });
 
     initBoard();
 
@@ -150,8 +141,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const hints = [
         "1. 一块 1×2 的小矩形骨牌，放在棋盘上时，它覆盖的两个格子颜色有什么规律？",
-        "2. 原始棋盘有多少黑格、多少白格？去掉对角线两端的两格之后，黑格和白格各剩多少？",
-        "3. 如果每块骨牌都必须同时盖一黑一白，而剩余棋盘的黑格与白格数量不相等，覆盖任务能完成吗？为什么？"
+        "2.原始棋盘的黑色与白色方格数量是平衡的吗？去掉对角线上的两个方格后黑白方格的数量还平衡吗？",
+        "3.如果残缺棋盘的黑白方格数量不平衡了，而每块骨牌是由一黑一白两个小方格组成的，能够恰好覆盖残缺的棋盘吗？"
     ];
 
     let currentHintIndex = 0;
